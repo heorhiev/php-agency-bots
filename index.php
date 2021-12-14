@@ -1,4 +1,8 @@
 <?php
+/**
+ * Главная
+ */
+
 
 include 'app/load.php';
 
