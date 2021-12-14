@@ -1,0 +1,54 @@
+*, :before, :after{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    outline: 0;
+    border: 0;
+    outline: 0;    
+}
+form {
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    width: 400px;
+    max-width: 100%;
+}
+form h2 {
+    margin-bottom: 15px;
+}
+.container {
+    width: 1000px;
+    max-width: 100%;
+}
+.container-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.form__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.home .buttons button {
+    width: 100%;
+}
+.feature {
+    border: 1px solid #dee2e6;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+#placeholder,
+#message:empty {
+    display: none;
+}
+#save_all_posts {
+    width: 100%;
+}
+#message {
+    padding: 0 15px;
+    border-left: 4px solid rgb(13, 202, 240);
+}
+form #message {
+    margin-top: 25px;
+}
