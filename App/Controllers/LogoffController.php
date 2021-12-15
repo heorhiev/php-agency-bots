@@ -1,6 +1,6 @@
 <?php
 /**
- * Файл класса контроллера главной
+ * Контроллер выхода
  *
  * @package app
  * @author  Ruslan Heorhiiev

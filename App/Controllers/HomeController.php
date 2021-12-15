@@ -1,6 +1,6 @@
 <?php
 /**
- * Файл класса контроллера главной
+ * Контроллер главной
  *
  * @package app
  * @author  Ruslan Heorhiiev
@@ -10,7 +10,6 @@
 namespace App\Controllers;
 
 use App\Entities\UserEntity;
-use App\Services\ResponseService;
 use App\Services\RequestService;
 use App\Services\AuthorizationService;
 use App\Repositories\PostsRepository;
@@ -23,14 +22,12 @@ class HomeController extends Controller {
         $user = AuthorizationService::getAuthUser();
 
         if ($user) {
-            // кнопка "сохранить все записи"
             if (RequestService::post('save_all_posts')) {
-                PostsRepository::addPosts(
+                // сохранить все записи
+                return PostsRepository::addPosts(
                     RequestService::post('posts'),
                     $user
                 );
-
-                return;
             }
     
             return $this->view('pages/home', [
@@ -41,6 +38,6 @@ class HomeController extends Controller {
         }
 
         // редирект если не авторизирован
-        ResponseService::redirect('/entrance.php');
+        $this->redirect('/entrance.php');
     }
 }
