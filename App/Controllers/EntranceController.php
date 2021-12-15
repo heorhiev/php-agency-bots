@@ -18,6 +18,11 @@ use App\Services\AuthorizationService;
 class EntranceController extends Controller {
 
     public function main() {
+
+        if (AuthorizationService::isAuthUser()) {
+            // если пользователь авторизирован
+            $this->redirect('/');
+        }
      
         if (RequestService::post('entrance')) {
             // если отправлена форма, идет проверка и авторизация пользователя
@@ -31,7 +36,7 @@ class EntranceController extends Controller {
         }
 
         return $this->view('pages/entrance', [
-            'message' => @$message,
+            'message' => isset($message) ? $message : '',
         ]);
     }
 }

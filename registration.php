@@ -3,6 +3,6 @@
  * Страница регистрации
  */
 
-include 'app/load.php';
+include 'App/load.php';
 
-new App('Registration');
+new App\Route('Registration');

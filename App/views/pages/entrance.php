@@ -9,7 +9,7 @@
 
     <body>
         <div class="container container-center">
-            <form method="post" action="?">
+            <form method="post" action="?" class="form-ajax">
                 <h2>Вход</h2>
                 
                 <div class="mb-3">
@@ -32,4 +32,7 @@
             </form>
         </div>
     </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    <script src="/assets/main/js/script.js"></script> 
 </html>

@@ -9,7 +9,7 @@
  
 namespace App\Entities;
 
-use App\Services\DBService;
+use App\Repositories\UsersRepository;
 
 
 class UserEntity extends Entity {
@@ -56,8 +56,10 @@ class UserEntity extends Entity {
      * Определение уровня пользователя в зависимости от роли (должности)
      */
     public function getLevel() {
-        if (isset(self::$roles[$this->getRole()])) {
-            return self::$roles[$this->getRole()]['level'];
+        $role = $this->getRole();
+
+        if (isset(self::$roles[$role])) {
+            return self::$roles[$role]['level'];
         }
 
         return;
@@ -72,30 +74,6 @@ class UserEntity extends Entity {
     }
 
 
-    /**
-     * Добавление пользователя
-     */
-    public function execute() {
-        if ($this->id) {
-            return;
-        }
-
-        $st = DBService::getMysqli()->prepare(
-            'INSERT INTO ' . static::TABLE . '(email, password, role) VALUES (?, ?, ?)'
-        );
-        
-        $st->bind_param(
-            'sss', 
-            $this->email, $this->password, $this->role
-        );
-
-        if ($st->execute()) {
-            $this->id = $st->insert_id;
-            return true;
-        }
-    }
-
-
     public static function getRoles() {
         return self::$roles;
     }
@@ -104,30 +82,22 @@ class UserEntity extends Entity {
     /**
      * Загрузка
      */
-    protected function init($attributes) {
-        $st = DBService::getMysqli()->prepare(
-            'SELECT * FROM ' . static::TABLE . ' WHERE (email = ? AND password = ?) OR id = ?'
-        );
+    protected function init($attributes = []) {
 
-        $st->bind_param(
-            'ssi', 
-            $attributes['email'], $attributes['password'], $attributes['id']
-        );
+        $result = UsersRepository::getUser($attributes);
 
-        $st->execute();
-
-        $result = $st->get_result();
-
-        if ($result->num_rows) {
-            // если что-то есть в БД, записываются данные из БД
-            $attributes = $result->fetch_array();
-
-            // только если найден пользователь
+        if ($result) {
+            $attributes = $result;
             $this->id = $attributes['id'];
         }
 
-        $this->email = $attributes['email'];
-        $this->password = $attributes['password'];
+        if (isset($attributes['email'])) {
+            $this->role = $attributes['email'];
+        }
+
+        if (isset($attributes['password'])) {
+            $this->role = $attributes['password'];
+        }
 
         if (isset($attributes['role'])) {
             $this->role = $attributes['role'];

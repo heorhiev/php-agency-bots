@@ -7,7 +7,10 @@
  * @version 1.0.0
  */
 
-class App {
+namespace App;
+
+
+class Route {
 
     public function __construct($page) {
 
@@ -18,6 +21,7 @@ class App {
         ], '\\');
 
         if (class_exists($controllerClassName)) {
+            session_start();
             $controller = new $controllerClassName();
             $controller->main();
         }

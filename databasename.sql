@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 14, 2021 at 09:36 PM
+-- Generation Time: Dec 15, 2021 at 12:57 AM
 -- Server version: 8.0.27-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -35,14 +35,6 @@ CREATE TABLE `posts` (
   `button` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `title`, `content`, `user_role`, `button`) VALUES
-(1, 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto', 'manager', 'Кнопка manager'),
-(2, 'qui est esse', 'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla', 'manager', 'Кнопка performer');
-
 -- --------------------------------------------------------
 
 --
@@ -61,13 +53,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `role`) VALUES
-(1, 'boss@gmail.com', '111111!', 'boss'),
-(2, 'manager1@gmail.com', '111111!', 'manager'),
-(3, 'manager2@gmail.com', '111111!', 'manager'),
-(4, 'performer1@gmail.com', '111111!', 'performer'),
-(5, 'performer2@gmail.com', '111111!', 'performer'),
-(6, 'performer3@gmail.com', '111111!', 'performer'),
-(7, 'performer4@gmail.com', '111111!', 'performer');
+(1, 'boss@gmail.com', '71dd0f3ab7b0633f673c5b99cd4ecc98', 'boss'),
+(2, 'manager1@gmail.com', '71dd0f3ab7b0633f673c5b99cd4ecc98', 'manager'),
+(3, 'manager2@gmail.com', '71dd0f3ab7b0633f673c5b99cd4ecc98', 'manager'),
+(4, 'performer1@gmail.com', '71dd0f3ab7b0633f673c5b99cd4ecc98', 'performer'),
+(5, 'performer2@gmail.com', '71dd0f3ab7b0633f673c5b99cd4ecc98', 'performer'),
+(6, 'performer3@gmail.com', '71dd0f3ab7b0633f673c5b99cd4ecc98', 'performer'),
+(7, 'performer4@gmail.com', '71dd0f3ab7b0633f673c5b99cd4ecc98', 'performer');
 
 --
 -- Indexes for dumped tables
@@ -94,13 +86,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

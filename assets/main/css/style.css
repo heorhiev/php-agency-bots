@@ -6,6 +6,9 @@
     border: 0;
     outline: 0;    
 }
+a:hover {
+    text-decoration: none;
+}
 form {
     padding: 20px;
     border: 1px solid #dee2e6;
@@ -32,6 +35,10 @@ form h2 {
 }
 .home .buttons button {
     width: 100%;
+}
+.home h2 a {
+    font-size: 16px;
+    font-weight: normal;
 }
 .feature {
     border: 1px solid #dee2e6;

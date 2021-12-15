@@ -1,6 +1,6 @@
 <?php
 /**
- * Файл класса контроллера главной
+ * Файл класса контроллера регистрации
  *
  * @package app
  * @author  Ruslan Heorhiiev
@@ -12,33 +12,29 @@ namespace App\Controllers;
 use Exception;
 use App\Entities\UserEntity;
 use App\Services\RequestService;
-use App\Services\ValidatorService;
 use App\Services\AuthorizationService;
+use App\Repositories\UsersRepository;
 
 
 class RegistrationController extends Controller {
     
     public function main() {
 
+        if (AuthorizationService::isAuthUser()) {
+            $this->redirect('/');
+        }
+
         if (RequestService::post('registration')) {
-            // если отправлена форма регистрации
             try {
-                $user = new UserEntity(
+                $user = UsersRepository::addUser(
                     RequestService::post()
                 );
 
-                if (!ValidatorService::validateEmail($user->getEmail())) {
-                    throw new Exception('Email не подходит.');
-                }
-
-                if (!ValidatorService::validatePassword($user->getPassword())) {                    
-                    throw new Exception('Пароль не подходит.');
-                }
-
-                // регистрация и авторизация, если ок
-                if ($user->execute()) {
+                if ($user) {
                     AuthorizationService::auth($user);
                     $this->redirect('/');
+                } else {
+                    $message = 'Ошибка регистрации.';
                 }
             } catch (Exception $e) {
                 $message = $e->getMessage();
@@ -47,7 +43,7 @@ class RegistrationController extends Controller {
 
         $this->view('pages/registration', [
             'roles' => UserEntity::getRoles(),
-            'message' => @$message,
+            'message' => isset($message) ? $message : '',
         ]);
     }
 }

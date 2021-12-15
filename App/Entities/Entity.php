@@ -10,7 +10,7 @@
 namespace App\Entities;
 
 
-class Entity {
+abstract class Entity {
 
     const TABLE = '';
 
@@ -27,17 +27,13 @@ class Entity {
     }
 
 
-    public function execute() {
-
-    }
-
-
     public static function getTableName() {
         return static::TABLE;
     }
 
-
-    protected function init($attributes) {
-
-    }
+    
+    /**
+     * Загрузка
+     */
+    abstract protected function init($attributes = []);
 }

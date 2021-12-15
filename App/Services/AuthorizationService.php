@@ -29,6 +29,22 @@ class AuthorizationService extends Service {
 
 
     /**
+     * Деавторизация пользователя
+     */
+    public static function logoff() {
+        SessionService::set('user_id', null);
+    }
+
+
+    /**
+     * Авториризорован ли пользователь
+     */
+    public static function isAuthUser() {
+        return (bool) self::getAuthUser();
+    }
+
+
+    /**
      * Возвращает авторизированного пользователя
      */
     public static function getAuthUser() {

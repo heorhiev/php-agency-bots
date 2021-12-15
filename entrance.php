@@ -3,7 +3,6 @@
  * Страница входа
  */
 
- 
-include 'app/load.php';
+include 'App/load.php';
 
-new App('Entrance');
+new App\Route('Entrance');

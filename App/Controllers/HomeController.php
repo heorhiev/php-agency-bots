@@ -11,9 +11,9 @@ namespace App\Controllers;
 
 use App\Entities\UserEntity;
 use App\Services\ResponseService;
-use App\Services\ArchiveService;
 use App\Services\RequestService;
 use App\Services\AuthorizationService;
+use App\Repositories\PostsRepository;
 
 
 class HomeController extends Controller {
@@ -22,10 +22,10 @@ class HomeController extends Controller {
 
         $user = AuthorizationService::getAuthUser();
 
-        if ($user) {            
+        if ($user) {
             // кнопка "сохранить все записи"
             if (RequestService::post('save_all_posts')) {
-                ArchiveService::addPosts(
+                PostsRepository::addPosts(
                     RequestService::post('posts'),
                     $user
                 );
@@ -36,7 +36,7 @@ class HomeController extends Controller {
             return $this->view('pages/home', [
                 'user' => $user,
                 'roles' => UserEntity::getRoles(),
-                'posts' => ArchiveService::getPosts(),
+                'posts' => PostsRepository::getPosts(),
             ]);
         }
 

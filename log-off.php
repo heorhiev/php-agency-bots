@@ -1,8 +1,8 @@
 <?php
 /**
- * Главная
+ * Выход
  */
 
 include 'App/load.php';
 
-new App\Route('Home');
+new App\Route('Logoff');

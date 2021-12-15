@@ -9,13 +9,12 @@
 
     <body>
         <div class="container container-center">
-            <form method="post" action="?">
+            <form method="post" action="?" class="form-ajax">
                 <h2>Регистрация</h2>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" minlength="6" required="">
-                    <div id="emailHelp" class="form-text">Введите Email адрес для входа.</div>
+                    <input type="email" class="form-control" id="email" name="email" minlength="6" required="">
                 </div>
 
                 <div class="mb-3">
@@ -44,4 +43,7 @@
             </form>
         </div>
     </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    <script src="/assets/main/js/script.js"></script> 
 </html>

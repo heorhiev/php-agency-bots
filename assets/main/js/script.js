@@ -46,6 +46,31 @@ jQuery.noConflict(); (function ($) {
         });
 
 
+        // форма регистрации/авторизации
+        $body.on('submit', '.form-ajax', function () {
+            var $this = $(this);
+
+            $('#message').html('');
+
+            $.ajax({
+                'method': $this.attr('method'),
+                'url': $this.attr('action'),
+                'data': $this.serialize(),
+            }).done(function (response) {
+                console.log(response);
+                let message = $(response).find('#message').html();
+
+                if (message) {
+                    $('#message').html(message);
+                } else {
+                    window.location = '/';
+                }
+            });
+
+            return false;
+        });
+
+
         // добавление записи в ДОМ
         function addPost(post) {
             var $post = $('#placeholder .post').clone();

@@ -9,7 +9,6 @@
  
 namespace App\Entities;
 
-use App\Services\DBService;
 
 class PostEntity extends Entity {
 
@@ -38,28 +37,9 @@ class PostEntity extends Entity {
 
 
     /**
-     * Добавление записи
-     */
-    public function execute() {
-        $st = DBService::getMysqli()->prepare(
-            'INSERT INTO ' . static::TABLE . '(title, content, user_role, button) VALUES (?, ?, ?, ?)'
-        );
-        
-        $st->bind_param(
-            'ssss', 
-            $this->title, $this->content, $this->userRole, $this->button
-        );
-
-        print_r($st);
-
-        $st->execute();
-    }
-
-
-    /**
      * Загрузка
      */
-    protected function init($attributes) {
+    protected function init($attributes = []) {
         $this->title = $attributes['title'];
         $this->content = $attributes['content'];
         $this->userRole = $attributes['user_role'];

@@ -13,7 +13,7 @@ use App\Services\RenderService;
 use App\Services\ResponseService;
 
 
-class Controller {        
+abstract class Controller {        
     
     /**
      * Отображение шаблона
@@ -29,7 +29,4 @@ class Controller {
     protected function redirect($to) {
         return ResponseService::redirect($to);;
     }
-
-
-
 }
