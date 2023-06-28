@@ -5,7 +5,7 @@ namespace App;
 use App\Exceptions\NotFoundException;
 use App\Services\RequestService;
 
-class Main
+class Http
 {
     /**
      * @throws NotFoundException
@@ -15,9 +15,9 @@ class Main
         $get = RequestService::get();
 
         try {
-            Route::run($get['page'] ?? 'Home');
+            Route::run('Http', $get['page'] ?? 'Home');
         } catch (NotFoundException $exception) {
-            Route::run('NotFound');
+            Route::run('Http', 'NotFound');
         }
     }
 }

@@ -24,7 +24,7 @@
 
                 <div class="form__bottom">
                     <button type="submit" class="btn btn-primary">Войти</button>
-                    <a href="/public/registration.php">Зарегистрироваться</a>
+                    <a href="/?page=registration">Зарегистрироваться</a>
                     <input type="hidden" name="entrance" value="1">
                 </div>
 

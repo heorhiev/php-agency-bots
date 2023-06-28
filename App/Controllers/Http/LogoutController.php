@@ -7,10 +7,10 @@
  * @version 1.0.0
  */
  
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
-use App\Services\ResponseService;
 use App\Services\AuthorizationService;
+use App\Services\ResponseService;
 
 
 class LogoutController extends Controller
@@ -18,6 +18,6 @@ class LogoutController extends Controller
     public function main()
     {
         AuthorizationService::logout();
-        ResponseService::redirect('/entrance.php');
+        ResponseService::redirect('/?page=entrance');
     }
 }

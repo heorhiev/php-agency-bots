@@ -7,13 +7,13 @@
  * @version 1.0.0
  */
  
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
-use Exception;
 use App\Entities\UserEntity;
-use App\Services\RequestService;
-use App\Services\AuthorizationService;
 use App\Repositories\UsersRepository;
+use App\Services\AuthorizationService;
+use App\Services\RequestService;
+use Exception;
 
 
 class RegistrationController extends Controller

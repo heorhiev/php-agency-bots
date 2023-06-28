@@ -7,13 +7,9 @@
  * @version 1.0.0
  */
 
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
-use App\Entities\UserEntity;
-use App\Services\RequestService;
 use App\Services\ResponseService;
-use App\Services\SessionService;
-use App\Services\AuthorizationService;
 
 
 class NotFoundController extends Controller

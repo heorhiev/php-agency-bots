@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
  
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use App\Services\RenderService;
 use App\Services\ResponseService;

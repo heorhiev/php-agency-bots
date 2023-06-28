@@ -17,12 +17,13 @@ class Route
     /**
      * @throws NotFoundException
      */
-    public static function run(?string $page)
+    public static function run($side, ?string $page)
     {
         if ($page) {
             $controllerClassName = implode([
                 'App',
                 'Controllers',
+                $side,
                 $page . 'Controller'
             ], '\\');
 

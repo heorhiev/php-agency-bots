@@ -7,12 +7,11 @@
  * @version 1.0.0
  */
  
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use App\Entities\UserEntity;
-use App\Services\RequestService;
-use App\Services\SessionService;
 use App\Services\AuthorizationService;
+use App\Services\RequestService;
 
 
 class EntranceController extends Controller

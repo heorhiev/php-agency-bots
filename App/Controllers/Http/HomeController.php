@@ -7,12 +7,12 @@
  * @version 1.0.0
  */
  
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use App\Entities\UserEntity;
-use App\Services\RequestService;
-use App\Services\AuthorizationService;
 use App\Repositories\PostsRepository;
+use App\Services\AuthorizationService;
+use App\Services\RequestService;
 
 
 class HomeController extends Controller
@@ -38,6 +38,6 @@ class HomeController extends Controller
         }
 
         // редирект если не авторизирован
-        $this->redirect('/entrance.php');
+        $this->redirect('/?page=entrance');
     }
 }
