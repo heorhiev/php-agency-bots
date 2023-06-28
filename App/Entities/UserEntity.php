@@ -1,12 +1,5 @@
 <?php
-/**
- * Файл класса сущности
- *
- * @package app
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
- 
+
 namespace App\Entities;
 
 use App\Repositories\UsersRepository;
@@ -21,7 +14,7 @@ class UserEntity extends Entity
     private $role;
     private $password;
 
-    // роли (должности)
+    // roles
     private static $roles = [
         'boss' => [
             'title' => 'Директор',
@@ -57,7 +50,7 @@ class UserEntity extends Entity
 
 
     /**
-     * Определение уровня пользователя в зависимости от роли (должности)
+     * Detect user leve by role
      */
     public function getLevel()
     {
@@ -72,7 +65,7 @@ class UserEntity extends Entity
 
 
     /**
-     * Право на действие в зависимости от уровня
+     * Check access by level
      */
     public function can($level): bool
     {
@@ -87,7 +80,7 @@ class UserEntity extends Entity
 
 
     /**
-     * Загрузка
+     * Load
      */
     protected function init($attributes = [])
     {
@@ -98,10 +91,6 @@ class UserEntity extends Entity
             $this->id = $attributes['id'];
         }
 
-        foreach ($attributes as $property => $value) {
-            if (property_exists($this, $property)) {
-                $this->{$property} = $value;
-            }
-        }
+        parent::init($attributes);
     }
 }

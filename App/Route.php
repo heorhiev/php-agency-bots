@@ -1,16 +1,9 @@
 <?php
-/**
- * Файл класса роутинга
- *
- * @package app
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
 
 namespace App;
 
-
 use App\Exceptions\NotFoundException;
+
 
 class Route
 {
@@ -20,12 +13,12 @@ class Route
     public static function run($side, ?string $page)
     {
         if ($page) {
-            $controllerClassName = implode([
+            $controllerClassName = implode('\\', [
                 'App',
                 'Controllers',
                 $side,
                 $page . 'Controller'
-            ], '\\');
+            ]);
 
             if (class_exists($controllerClassName)) {
                 session_start();

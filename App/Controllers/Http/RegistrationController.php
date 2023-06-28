@@ -1,12 +1,5 @@
 <?php
-/**
- * Контроллер регистрации
- *
- * @package app
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
- 
+
 namespace App\Controllers\Http;
 
 use App\Entities\UserEntity;
@@ -20,7 +13,6 @@ class RegistrationController extends Controller
 {
     public function main()
     {
-
         if (AuthorizationService::isAuthUser()) {
             $this->redirect('/');
         }

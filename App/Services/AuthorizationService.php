@@ -15,11 +15,7 @@ use App\Services\SessionService;;
 
 class AuthorizationService extends Service
 {
-    
-    /**
-     * Авторизация пользователя
-     */
-    public static function auth($user)
+    public static function auth(UserEntity $user): bool
     {
         if ($user->getId()) {
             SessionService::set('user_id', $user->getId());
@@ -30,33 +26,23 @@ class AuthorizationService extends Service
     }
 
 
-    /**
-     * Деавторизация пользователя
-     */
     public static function logout()
     {
         SessionService::set('user_id', null);
     }
 
 
-    /**
-     * Авториризорован ли пользователь
-     */
     public static function isAuthUser(): bool
     {
         return (bool) self::getAuthUser();
     }
 
 
-    /**
-     * Возвращает авторизированного пользователя
-     */
     public static function getAuthUser(): ?UserEntity
     {
         $userId = SessionService::get('user_id');
 
         if ($userId) {
-            // если в сессии сохранен id пользователя, загружается нужный пользователь
             $user = new UserEntity([
                 'id' => $userId,
             ]);

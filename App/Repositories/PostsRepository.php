@@ -1,25 +1,15 @@
 <?php
-/**
- * Файл класса репозитория записей
- *
- * @package app
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
- 
+
 namespace App\Repositories;
 
 use App\Entities\PostEntity;
 use App\Services\DBService;
 
 
-class PostsRepository extends Repository {
-
-
-    /**
-     * Возвращает все записи
-     */
-    public static function getPosts() {
+class PostsRepository extends Repository
+{
+    public static function getPosts(): array
+    {
         $st = DBService::getMysqli()->query(
             'SELECT * FROM ' . PostEntity::getTableName()
         );
@@ -28,9 +18,6 @@ class PostsRepository extends Repository {
     }
 
 
-    /**
-     * Добавление записи
-     */
     public static function addPost($post): bool
     {
         $st = DBService::getMysqli()->prepare(
@@ -46,9 +33,6 @@ class PostsRepository extends Repository {
     }
 
 
-    /**
-     * Добавляет запись
-     */
     public static function addPosts($posts, $user): array
     {
         $results = [];
@@ -56,7 +40,6 @@ class PostsRepository extends Repository {
         foreach ($posts as $post) {
 
             if (!$user->can($post['level'])) {
-                // проверка на случай, если сняли disable
                 continue;
             }
 

@@ -1,12 +1,5 @@
 <?php
-/**
- * Контроллер главной
- *
- * @package app
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
- 
+
 namespace App\Controllers\Http;
 
 use App\Entities\UserEntity;
@@ -23,7 +16,6 @@ class HomeController extends Controller
 
         if ($user) {
             if (RequestService::post('save_all_posts')) {
-                // сохранить все записи
                 return PostsRepository::addPosts(
                     RequestService::post('posts'),
                     $user
@@ -37,7 +29,6 @@ class HomeController extends Controller
             ]);
         }
 
-        // редирект если не авторизирован
         $this->redirect('/?page=entrance');
     }
 }

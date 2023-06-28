@@ -52,7 +52,7 @@ class UsersRepository extends Repository
 
 
     /**
-     * Добавление пользователя
+     * @throws Exception
      */
     public static function addUser($params)
     {
@@ -68,10 +68,12 @@ class UsersRepository extends Repository
         $st = DBService::getMysqli()->prepare(
             'INSERT INTO ' . UserEntity::getTableName() . '(email, password, role) VALUES (?, ?, ?)'
         );
+
+        $passHash = self::passHash($params['password']);
         
         $st->bind_param(
             'sss', 
-            $params['email'], self::passHash($params['password']), $params['role']
+            $params['email'], $passHash, $params['role']
         );
 
         if ($st->execute()) {
@@ -82,10 +84,6 @@ class UsersRepository extends Repository
     }
 
 
-    /**
-     * Хеширование пароля
-     * самый простой вариант
-     */
     protected static function passHash($password): string
     {
         return md5($password);

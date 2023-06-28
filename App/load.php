@@ -1,11 +1,4 @@
 <?php
-/**
- * Файл инициализации
- *
- * @package app
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
 
 include 'confiq.php';
 

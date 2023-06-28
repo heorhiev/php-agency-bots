@@ -1,12 +1,5 @@
 <?php
-/**
- * Файл класса сущности
- *
- * @package app
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
- 
+
 namespace App\Entities;
 
 
@@ -35,9 +28,16 @@ abstract class Entity
         return static::TABLE;
     }
 
-    
+
     /**
-     * Загрузка
+     * Load
      */
-    abstract protected function init($attributes = []);
+    protected function init(array $attributes)
+    {
+        foreach ($attributes as $property => $value) {
+            if (property_exists($this, $property)) {
+                $this->{$property} = $value;
+            }
+        }
+    }
 }

@@ -1,21 +1,10 @@
 <?php
-/**
- * Файл класса валидатора
- *
- * @package App
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
- 
+
 namespace App\Services; 
 
  
 class ValidatorService extends Service
 {
-    
-    /**
-     * Проверка email
-     */
     public static function validateEmail($email): bool
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -34,9 +23,6 @@ class ValidatorService extends Service
     }
 
 
-    /**
-     * Проверка пароля
-     */
     public static function validatePassword($password): bool
     {
         if (mb_strlen($password) > 5 && strrpos($password, '!') !== false) {

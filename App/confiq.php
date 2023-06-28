@@ -1,11 +1,4 @@
 <?php
-/**
- * Файл конфигураций
- *
- * @package app
- * @author  Ruslan Heorhiiev
- * @version 1.0.0
- */
 
 define('DB_NAME', 'databasename');
 define('DB_USER', 'ruslan');
