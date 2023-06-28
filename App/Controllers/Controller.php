@@ -15,7 +15,8 @@ use App\Services\ResponseService;
 
 abstract class Controller
 {
-    
+    abstract public function main();
+
     /**
      * Отображение шаблона
      */

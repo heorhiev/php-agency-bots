@@ -20,4 +20,10 @@ class ResponseService extends Service
         header("Location: " . $to, true, $code);
         exit;
     }
+
+
+    public static function setHeader($header)
+    {
+        header($header);
+    }
 }    

@@ -3,8 +3,8 @@
     <head>
         <title>Вход</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/assets/main/css/style.css" rel="stylesheet">
+        <link href="/public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/public/assets/main/css/style.css" rel="stylesheet">
     </head>
 
     <body>
@@ -24,7 +24,7 @@
 
                 <div class="form__bottom">
                     <button type="submit" class="btn btn-primary">Войти</button>
-                    <a href="/registration.php">Зарегистрироваться</a>
+                    <a href="/public/registration.php">Зарегистрироваться</a>
                     <input type="hidden" name="entrance" value="1">
                 </div>
 
@@ -34,5 +34,5 @@
     </body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
-    <script src="/assets/main/js/script.js"></script> 
+    <script src="/public/assets/main/js/script.js"></script>
 </html>

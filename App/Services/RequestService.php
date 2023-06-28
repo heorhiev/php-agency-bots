@@ -15,16 +15,14 @@ class RequestService extends Service
     /**
      * Возвращает данные http запроса метода POST
      */
+    public static function get(string $name = null)
+    {
+        return ArrayService::getValue($_GET, $name, $_GET);
+    }
+
+
     public static function post(string $name = null)
     {
-        if ($name) {
-            if (isset($_POST[$name])) {
-                return $_POST[$name];
-            }
-        } else {
-            return $_POST;
-        }
-        
-        return null;
+        return ArrayService::getValue($_POST, $name, $_POST);
     }
 }    

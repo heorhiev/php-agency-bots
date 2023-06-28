@@ -10,20 +10,31 @@
 namespace App;
 
 
-class Route {
+use App\Exceptions\NotFoundException;
 
-    public function __construct($page) {
+class Route
+{
+    /**
+     * @throws NotFoundException
+     */
+    public static function run(?string $page)
+    {
+        if ($page) {
+            $controllerClassName = implode([
+                'App',
+                'Controllers',
+                $page . 'Controller'
+            ], '\\');
 
-        $controllerClassName = implode([
-            'App',
-            'Controllers',
-            $page . 'Controller'
-        ], '\\');
+            if (class_exists($controllerClassName)) {
+                session_start();
+                $controller = new $controllerClassName();
+                $controller->main();
 
-        if (class_exists($controllerClassName)) {
-            session_start();
-            $controller = new $controllerClassName();
-            $controller->main();
+                return;
+            }
         }
+
+        throw new NotFoundException();
     }
 }

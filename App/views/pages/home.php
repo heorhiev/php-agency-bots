@@ -3,15 +3,15 @@
     <head>
         <title>Главная</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/assets/main/css/style.css" rel="stylesheet">
+        <link href="/public/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/public/assets/main/css/style.css" rel="stylesheet">
     </head>
 
     <body>
         <div class="container home px-4 py-5">
             <h2 class="pb-2 border-bottom">
                 Спасибо что вошли, <?= $user->getEmail(); ?> <small>(<?= $user->getRole(); ?>)</small>
-                <a href="/log-off.php">Выйти</a>
+                <a href="/public/log-off.php">Выйти</a>
             </h2>
 
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 buttons">
@@ -66,5 +66,5 @@
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
-    <script src="/assets/main/js/script.js"></script> 
+    <script src="/public/assets/main/js/script.js"></script>
 </html>
