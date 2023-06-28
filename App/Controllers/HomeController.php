@@ -15,10 +15,10 @@ use App\Services\AuthorizationService;
 use App\Repositories\PostsRepository;
 
 
-class HomeController extends Controller {
-    
-    public function main() {
-
+class HomeController extends Controller
+{
+    public function main()
+    {
         $user = AuthorizationService::getAuthUser();
 
         if ($user) {

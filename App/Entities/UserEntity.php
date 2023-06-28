@@ -12,7 +12,8 @@ namespace App\Entities;
 use App\Repositories\UsersRepository;
 
 
-class UserEntity extends Entity {
+class UserEntity extends Entity
+{
 
     const TABLE = 'users';
 
@@ -37,17 +38,20 @@ class UserEntity extends Entity {
     ];
 
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
 
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
 
-    public function getRole() {
+    public function getRole()
+    {
         return $this->role;
     }
 
@@ -55,26 +59,29 @@ class UserEntity extends Entity {
     /**
      * Определение уровня пользователя в зависимости от роли (должности)
      */
-    public function getLevel() {
+    public function getLevel()
+    {
         $role = $this->getRole();
 
         if (isset(self::$roles[$role])) {
             return self::$roles[$role]['level'];
         }
 
-        return;
+        return null;
     }
 
 
     /**
      * Право на действие в зависимости от уровня
      */
-    public function can($level) {
+    public function can($level): bool
+    {
         return $this->getLevel() >= $level;
     }
 
 
-    public static function getRoles() {
+    public static function getRoles(): array
+    {
         return self::$roles;
     }
 
@@ -82,8 +89,8 @@ class UserEntity extends Entity {
     /**
      * Загрузка
      */
-    protected function init($attributes = []) {
-
+    protected function init($attributes = [])
+    {
         $result = UsersRepository::getUser($attributes);
 
         if ($result) {
@@ -91,16 +98,10 @@ class UserEntity extends Entity {
             $this->id = $attributes['id'];
         }
 
-        if (isset($attributes['email'])) {
-            $this->role = $attributes['email'];
-        }
-
-        if (isset($attributes['password'])) {
-            $this->role = $attributes['password'];
-        }
-
-        if (isset($attributes['role'])) {
-            $this->role = $attributes['role'];
+        foreach ($attributes as $property => $value) {
+            if (property_exists($this, $property)) {
+                $this->{$property} = $value;
+            }
         }
     }
 }

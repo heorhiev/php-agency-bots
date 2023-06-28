@@ -10,12 +10,14 @@
 namespace App\Services; 
 
  
-class ValidatorService extends Service {
+class ValidatorService extends Service
+{
     
     /**
      * Проверка email
      */
-    public static function validateEmail($email) {
+    public static function validateEmail($email): bool
+    {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             // доп. проверка: мин 3 символа до @ и мин 3 буквы после @
             $parts = explode('@', $email);
@@ -35,7 +37,8 @@ class ValidatorService extends Service {
     /**
      * Проверка пароля
      */
-    public static function validatePassword($password) {
+    public static function validatePassword($password): bool
+    {
         if (mb_strlen($password) > 5 && strrpos($password, '!') !== false) {
             return true;
         }

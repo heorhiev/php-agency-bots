@@ -13,12 +13,14 @@ use App\Services\RenderService;
 use App\Services\ResponseService;
 
 
-abstract class Controller {        
+abstract class Controller
+{
     
     /**
      * Отображение шаблона
      */
-    protected function view($template, $params = []) {
+    protected function view(string $template, array $params = []): string
+    {
         return RenderService::template($template, $params);
     }
 
@@ -26,7 +28,8 @@ abstract class Controller {
     /**
      * Редирект
      */
-    protected function redirect($to) {
-        return ResponseService::redirect($to);;
+    protected function redirect(string $to)
+    {
+        ResponseService::redirect($to);
     }
 }

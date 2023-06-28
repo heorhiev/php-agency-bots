@@ -10,24 +10,28 @@
 namespace App\Entities;
 
 
-abstract class Entity {
+abstract class Entity
+{
 
     const TABLE = '';
 
     protected $id;
 
     
-    public function __construct($attributes = []) {
+    public function __construct($attributes = [])
+    {
         $this->init($attributes);
     }
 
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
 
-    public static function getTableName() {
+    public static function getTableName(): string
+    {
         return static::TABLE;
     }
 

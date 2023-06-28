@@ -10,12 +10,14 @@
 namespace App\Services; 
  
 
-class SessionService extends Service {
+class SessionService extends Service
+{
     
     /**
      * Запись в сессию
      */
-    public static function set($key, $value) {
+    public static function set($key, $value)
+    {
         $_SESSION[$key] = $value;
     }
 
@@ -23,8 +25,8 @@ class SessionService extends Service {
     /**
      * Получение из сессии
      */
-    public static function get($key, $default = null) {
-        
+    public static function get($key, $default = null)
+    {
         if (isset($_SESSION[$key])) {
             return $_SESSION[$key];
         }

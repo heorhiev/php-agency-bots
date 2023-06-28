@@ -10,7 +10,8 @@
 namespace App\Entities;
 
 
-class PostEntity extends Entity {
+class PostEntity extends Entity
+{
 
     const TABLE = 'posts';
 
@@ -19,19 +20,23 @@ class PostEntity extends Entity {
     private $userRole;
     private $button;
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         return $this->content;
     }
 
-    public function getUserRole() {
+    public function getUserRole()
+    {
         return $this->userRole;
     }
 
-    public function getButton() {
+    public function getButton()
+    {
         return $this->button;
     }
 
@@ -39,7 +44,8 @@ class PostEntity extends Entity {
     /**
      * Загрузка
      */
-    protected function init($attributes = []) {
+    protected function init($attributes = [])
+    {
         $this->title = $attributes['title'];
         $this->content = $attributes['content'];
         $this->userRole = $attributes['user_role'];

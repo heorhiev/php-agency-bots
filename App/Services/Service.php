@@ -9,7 +9,7 @@
  
 namespace App\Services;
 
-
-abstract class Service {
+abstract class Service
+{
 
 }

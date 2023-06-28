@@ -10,14 +10,13 @@
 namespace App\Services; 
  
 
-class RequestService extends Service {
-
-
+class RequestService extends Service
+{
     /**
      * Возвращает данные http запроса метода POST
      */
-    public static function post($name = '') {  
-
+    public static function post(string $name = null)
+    {
         if ($name) {
             if (isset($_POST[$name])) {
                 return $_POST[$name];

@@ -31,7 +31,8 @@ class PostsRepository extends Repository {
     /**
      * Добавление записи
      */
-    public static function addPost($post) {
+    public static function addPost($post): bool
+    {
         $st = DBService::getMysqli()->prepare(
             'INSERT INTO ' . PostEntity::getTableName() . '(title, content, user_role, button) VALUES (?, ?, ?, ?)'
         );
@@ -41,14 +42,17 @@ class PostsRepository extends Repository {
             $post['title'], $post['content'], $post['user_role'], $post['button']
         );
 
-        $st->execute();
+        return $st->execute();
     }
 
 
     /**
      * Добавляет запись
      */
-    public static function addPosts($posts, $user) {
+    public static function addPosts($posts, $user): array
+    {
+        $results = [];
+
         foreach ($posts as $post) {
 
             if (!$user->can($post['level'])) {
@@ -56,7 +60,7 @@ class PostsRepository extends Repository {
                 continue;
             }
 
-            self::addPost([
+            $results[] = self::addPost([
                 'id' => $post['id'],
                 'title' => $post['title'],
                 'content' => $post['body'],
@@ -64,6 +68,8 @@ class PostsRepository extends Repository {
                 'user_role' => $user->getRole(),
             ]);
         }
+
+        return $results;
     }
 
 }

@@ -16,9 +16,10 @@ use App\Services\AuthorizationService;
 use App\Repositories\UsersRepository;
 
 
-class RegistrationController extends Controller {
-    
-    public function main() {
+class RegistrationController extends Controller
+{
+    public function main()
+    {
 
         if (AuthorizationService::isAuthUser()) {
             $this->redirect('/');
@@ -43,7 +44,7 @@ class RegistrationController extends Controller {
 
         $this->view('pages/registration', [
             'roles' => UserEntity::getRoles(),
-            'message' => isset($message) ? $message : '',
+            'message' => $message ?? '',
         ]);
     }
 }

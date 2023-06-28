@@ -10,13 +10,14 @@
 namespace App\Services; 
  
 
-class ResponseService extends Service {
-
+class ResponseService extends Service
+{
     /**
      * Редирект
      */
-    public static function redirect($to = '') {  
-        header("Location: " . $to, true, 307);
+    public static function redirect(string $to, int $code = 307)
+    {
+        header("Location: " . $to, true, $code);
         exit;
     }
 }    

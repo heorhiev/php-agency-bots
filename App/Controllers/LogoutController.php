@@ -13,10 +13,11 @@ use App\Services\ResponseService;
 use App\Services\AuthorizationService;
 
 
-class LogoffController extends Controller {
-    
-    public function main() {
-        AuthorizationService::logoff();
+class LogoutController extends Controller
+{
+    public function main()
+    {
+        AuthorizationService::logout();
         ResponseService::redirect('/entrance.php');
     }
 }

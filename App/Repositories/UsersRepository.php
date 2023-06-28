@@ -15,13 +15,15 @@ use App\Services\DBService;
 use App\Services\ValidatorService;
 
 
-class UsersRepository extends Repository {
+class UsersRepository extends Repository
+{
 
 
     /**
      * Возвращает пользователя
      */
-    public static function getUser($params = []) {
+    public static function getUser($params = [])
+    {
         $st = DBService::getMysqli()->prepare(
             'SELECT * FROM ' . UserEntity::getTableName() . ' WHERE (email = ? AND password = ?) OR id = ?'
         );
@@ -52,7 +54,8 @@ class UsersRepository extends Repository {
     /**
      * Добавление пользователя
      */
-    public static function addUser($params) {
+    public static function addUser($params)
+    {
 
         if (!ValidatorService::validateEmail($params['email'])) {
             throw new Exception('Email не подходит.');
@@ -83,7 +86,8 @@ class UsersRepository extends Repository {
      * Хеширование пароля
      * самый простой вариант
      */
-    protected static function passHash($password) {
+    protected static function passHash($password): string
+    {
         return md5($password);
     }
 }

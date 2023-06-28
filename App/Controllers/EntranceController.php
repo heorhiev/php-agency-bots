@@ -15,10 +15,10 @@ use App\Services\SessionService;
 use App\Services\AuthorizationService;
 
 
-class EntranceController extends Controller {
-
-    public function main() {
-
+class EntranceController extends Controller
+{
+    public function main(): string
+    {
         if (AuthorizationService::isAuthUser()) {
             // если пользователь авторизирован
             $this->redirect('/');
@@ -36,7 +36,7 @@ class EntranceController extends Controller {
         }
 
         return $this->view('pages/entrance', [
-            'message' => isset($message) ? $message : '',
+            'message' => $message ?? '',
         ]);
     }
 }
