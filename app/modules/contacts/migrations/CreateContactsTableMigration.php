@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\users\migrations;
+namespace app\modules\contacts\migrations;
 
 use app\components\migrations\MigrationInterface;
 
 
-class CreateUsersTableMigration implements MigrationInterface
+class CreateContactsTableMigration implements MigrationInterface
 {
     public function up(): bool
     {

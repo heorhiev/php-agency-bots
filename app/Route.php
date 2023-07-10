@@ -13,22 +13,21 @@ class Route
     public static function start($side, ?string $action)
     {
         if ($action) {
-            $basePath = 'App\Controllers\\';
+            $basePath = 'app\controllers\\';
 
             $relativePath = explode('/', $action);
 
             $controllerName = ucfirst(array_pop($relativePath)) .  'Controller';
 
-            $relativePath = join('\\', $relativePath);
+            $relativePath = $relativePath ? join('\\', $relativePath) . '\\' : '';
 
-            $controllerPath = $basePath . $side . '\\' . $relativePath . '\\' . $controllerName;
+            $controllerPath = $basePath . $side . '\\' . $relativePath . $controllerName;
 
             if (class_exists($controllerPath)) {
                 session_start();
                 $controller = new $controllerPath();
-                $controller->main();
 
-                return;
+                return $controller->main();
             }
         }
 

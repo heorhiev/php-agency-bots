@@ -1,20 +1,34 @@
 <?php
 
-namespace App\Controllers\Http\telegram;
+namespace app\controllers\http\telegram;
 
 use app\dto\config\TelegramDto;
 use app\services\SettingsService;
 
 
-class VacancyController extends \App\Controllers\Http\Controller
+class VacancyController extends \app\controllers\Controller
 {
     public function main()
     {
         /** @var TelegramDto $options */
-        $options = new SettingsService('telegram', TelegramDto::class);
+        $options = SettingsService::load('telegram', TelegramDto::class);
 
-        $bot = new \TelegramBot\Api\BotApi($options->vacancyToken);
+        try {
+            $bot = new \TelegramBot\Api\Client($options->vacancyBotToken);
 
-        $bot->sendMessage($chatId, $messageText);
+            //Handle text messages
+            $bot->on(function (\TelegramBot\Api\Types\Update $update) use ($bot) {
+                $message = $update->getMessage();
+                $id = $message->getChat()->getId();
+                $bot->sendMessage($id, 'Your message: ' . $message->getText());
+            }, function () {
+                return true;
+            });
+
+            $bot->run();
+
+        } catch (\TelegramBot\Api\Exception $e) {
+            $e->getMessage();
+        }
     }
 }

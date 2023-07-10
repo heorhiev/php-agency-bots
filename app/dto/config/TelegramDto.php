@@ -7,5 +7,5 @@ use app\dto\Dto;
 
 class TelegramDto extends Dto
 {
-    public $vacancyToken;
+    public $vacancyBotToken;
 }

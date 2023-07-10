@@ -8,14 +8,14 @@ class SettingsService extends Service
     /**
      * @throws \Exception
      */
-    public function __construct($fileName, $dto)
+    public static function load($fileName, $dto)
     {
-        $path = SETTINGS_PATH . '/' . $fileName . '.json';
+        $path = CONFIG_PATH . '/' . $fileName . '.json';
 
         if (!file_exists($path)) {
             throw new \Exception("Settings file {$fileName} not found!");
         }
 
-        return new $dto(json_decode(file_get_contents($path)));
+        return new $dto(json_decode(file_get_contents($path), true));
     }
 }

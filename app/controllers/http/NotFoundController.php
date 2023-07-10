@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Controllers\Http;
+namespace app\controllers\http;
 
-use app\services\web\ResponseService;
+use app\controllers\Controller;
+use app\services\http\ResponseService;
 
 
 class NotFoundController extends Controller

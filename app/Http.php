@@ -13,9 +13,9 @@ class Http
     public function __construct()
     {
         try {
-            Route::start('Http', RequestService::get('action'));
+            Route::start('http', RequestService::get('action'));
         } catch (NotFoundException $exception) {
-            Route::start('Http', 'NotFound');
+            Route::start('http', 'NotFound');
         }
     }
 }
