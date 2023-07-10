@@ -1,4 +1,4 @@
 !*
 /vendor
-/config/settings/*
+/config/settings
 composer.lock
