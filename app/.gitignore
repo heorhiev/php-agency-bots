@@ -1,4 +1,4 @@
 !*
 /vendor
+/config/settings/*
 composer.lock
-/config/settings/*.json

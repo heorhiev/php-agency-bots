@@ -1,6 +1,7 @@
 <?php
 
-include 'confiq.php';
+include 'paths.php';
+include 'vendor/autoload.php';
 
 spl_autoload_register(function($class) {
 

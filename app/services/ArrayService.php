@@ -5,12 +5,20 @@ namespace app\services;
 
 class ArrayService extends Service
 {
-    public static function getValue($array, $key, $default = null)
+    public static function getValue($entity, $path, $default = null)
     {
-        if (isset($array[$key])) {
-            return $array[$key];
+        $keys = explode('.', $path);
+
+        while ($key = array_shift($keys)) {
+            if (is_array($entity) && isset($entity[$key])) {
+                $entity = $entity[$key];
+            } elseif (is_object($entity) && property_exists($entity, $key)) {
+                $entity = $entity->{$key};
+            } else {
+                return $default;
+            }
         }
 
-        return $default;
+        return $entity;
     }
 }
