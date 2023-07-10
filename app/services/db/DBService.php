@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Services; 
+namespace app\services\db;
 
+use app\services\Service;
 use mysqli;
- 
+
 
 class DBService extends Service
 {

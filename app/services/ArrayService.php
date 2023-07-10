@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace app\services;
 
 
 class ArrayService extends Service

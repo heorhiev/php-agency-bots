@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entities;
+namespace app\models;
 
 
-abstract class Entity
+abstract class Model
 {
 
     const TABLE = '';

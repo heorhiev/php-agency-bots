@@ -1,8 +1,5 @@
 <?php
-/**
- * Главная
- */
 
-include '../App/load.php';
+include '../app/load.php';
 
-new App\Http();
+new app\Http();

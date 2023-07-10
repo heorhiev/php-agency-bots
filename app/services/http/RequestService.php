@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Services; 
+namespace app\services\http;
  
+
+use app\services\ArrayService;
+use app\services\Service;
 
 class RequestService extends Service
 {

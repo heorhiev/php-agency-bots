@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace app;
 
 use App\Exceptions\NotFoundException;
-use App\Services\RequestService;
+use app\services\http\RequestService;
 
 class Http
 {
@@ -12,12 +12,10 @@ class Http
      */
     public function __construct()
     {
-        $get = RequestService::get();
-
         try {
-            Route::run('Http', $get['page'] ?? 'Home');
+            Route::start('Http', RequestService::get('action'));
         } catch (NotFoundException $exception) {
-            Route::run('Http', 'NotFound');
+            Route::start('Http', 'NotFound');
         }
     }
 }
