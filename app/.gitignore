@@ -1,4 +1,4 @@
 !*
 /vendor
-/config/settings/telegram.json
+/config/settings/*
 composer.lock
