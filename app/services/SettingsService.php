@@ -5,13 +5,10 @@ namespace app\services;
 
 class SettingsService extends Service
 {
-    private $_settings;
-
-
     /**
      * @throws \Exception
      */
-    public function __construct($fileName)
+    public function __construct($fileName, $dto)
     {
         $path = SETTINGS_PATH . '/' . $fileName . '.json';
 
@@ -19,12 +16,6 @@ class SettingsService extends Service
             throw new \Exception("Settings file {$fileName} not found!");
         }
 
-        $this->_settings = json_decode(file_get_contents($path));
-    }
-
-
-    public function getOption(string $key, $default = null)
-    {
-        return ArrayService::getValue($this->_settings, $key, $default);
+        return new $dto(json_decode(file_get_contents($path)));
     }
 }

@@ -2,16 +2,19 @@
 
 namespace App\Controllers\Http\telegram;
 
-
+use app\dto\config\TelegramDto;
 use app\services\SettingsService;
+
 
 class VacancyController extends \App\Controllers\Http\Controller
 {
     public function main()
     {
-        $telegramSettings = new SettingsService('telegram');
+        /** @var TelegramDto $options */
+        $options = new SettingsService('telegram', TelegramDto::class);
 
-        $options = $telegramSettings->getOption('vacancy_bot.token');
-        print_r($options);
+        $bot = new \TelegramBot\Api\BotApi($options->vacancyToken);
+
+        $bot->sendMessage($chatId, $messageText);
     }
 }
