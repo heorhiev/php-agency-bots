@@ -17,5 +17,11 @@ abstract class Bot
     }
 
 
+    public function getOptions()
+    {
+        return $this->_options;
+    }
+
+
     abstract public function run();
 }
