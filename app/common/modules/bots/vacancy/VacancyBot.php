@@ -1,18 +1,18 @@
 <?php
 
-namespace app\common\modules\bots;
+namespace app\common\modules\bots\vacancy;
 
-use app\common\services\LoggerService;
-use app\common\modules\bots\vacancy\StartCommand;
-use TelegramBot\Api\Types\Message;
+use app\common\modules\bots\Bot;
+use app\common\modules\bots\vacancy\commands\StartCommand;
 use app\common\services\LangService;
+use TelegramBot\Api\Types\Message;
 
 
 class VacancyBot extends Bot
 {
     public $_bot;
 
-    public function run()
+    public function handler()
     {
         $this->_bot = new \TelegramBot\Api\Client($this->_options->vacancyBotToken);
 

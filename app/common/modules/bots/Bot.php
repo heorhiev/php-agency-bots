@@ -23,5 +23,5 @@ abstract class Bot
     }
 
 
-    abstract public function run();
+    abstract public function handler();
 }
