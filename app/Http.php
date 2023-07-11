@@ -2,8 +2,8 @@
 
 namespace app;
 
-use App\Exceptions\NotFoundException;
-use app\services\http\RequestService;
+use app\common\exceptions\NotFoundException;
+use app\common\services\http\RequestService;
 
 class Http
 {
