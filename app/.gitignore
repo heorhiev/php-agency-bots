@@ -2,3 +2,4 @@
 /vendor
 /common/config/*
 composer.lock
+.idea

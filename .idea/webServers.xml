@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="53b281b6-1533-4994-9154-6c32a8f1632d" name="root calorie">
+        <fileTransfer rootFolder="/var/www/keycrm/base/api_html/bot" accessType="SFTP" host="65.108.239.153" port="45994" sshConfigId="b72e0f76-c424-4efc-a239-20aa97e7bde9" sshConfig="root calorie">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
