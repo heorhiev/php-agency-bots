@@ -15,8 +15,6 @@ interface RepositoryInterface
 
     public static function tableName(): string;
 
-    public static function columns(): array;
-
     public static function entityClassName(): string;
 
     public static function save(Entity $entity): bool;

@@ -8,17 +8,17 @@ use app\common\services\db\DBService;
 
 /**
  * @method static string tableName()
- * @method static array columns()
  */
 trait SavedTrait
 {
     public static $types = ['integer' => 'i', 'string' => 's'];
 
+
     public static function save(Entity $entity): bool
     {
-        $types = array_map([self::class, 'getBindTypeByType'], array_keys(static::columns()));
+        $types = array_map([self::class, 'getBindTypeByType'], array_keys($entity::fields()));
 
-        $columns = array_merge(...array_values(static::columns()));
+        $columns = array_merge(...array_values($entity::fields()));
         $placeholders = [];
 
         foreach ($columns as $column) {

@@ -10,6 +10,9 @@ abstract class Entity
 
     protected $id;
 
+
+    abstract public static function fields(): array;
+
     
     public function __construct($attributes = [])
     {

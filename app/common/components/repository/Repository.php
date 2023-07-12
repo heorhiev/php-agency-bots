@@ -13,7 +13,5 @@ abstract class Repository implements RepositoryInterface
 
     abstract public static function tableName(): string;
 
-    abstract public static function columns(): array;
-
     abstract public static function entityClassName(): string;
 }

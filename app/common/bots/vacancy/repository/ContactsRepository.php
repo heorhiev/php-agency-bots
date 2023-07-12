@@ -15,15 +15,6 @@ class ContactsRepository extends Repository
     }
 
 
-    public static function columns(): array
-    {
-        return [
-            'integer' => ['id'],
-            'string' => ['name'],
-        ];
-    }
-
-
     public static function entityClassName(): string
     {
         return Contact::class;
