@@ -3,7 +3,7 @@
 namespace app\common\components;
 
 
-abstract class Model
+abstract class Entity
 {
 
     const TABLE = '';

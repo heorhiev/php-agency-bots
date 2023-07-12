@@ -2,7 +2,7 @@
 
 namespace app\common\modules\vacancy;
 
-use app\common\bots\Bot;
+use app\common\components\Bot;
 use app\common\modules\vacancy\commands\StartCommand;
 use app\common\services\LangService;
 use TelegramBot\Api\Types\Message;

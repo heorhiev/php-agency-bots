@@ -2,16 +2,13 @@
 
 namespace app\common\modules\contacts;
 
-use app\common\components\Model;
+use app\common\components\Entity;
+use app\common\modules\vacancy\repository\ContactsRepository;
 
 
-class Contact extends Model
+class Contact extends Entity
 {
-    const TABLE = 'users';
-
     public $id;
-
-    public $email;
 
     public $name;
 
@@ -21,7 +18,7 @@ class Contact extends Model
      */
     protected function init($attributes = [])
     {
-        $result = UsersRepository::getUser($attributes);
+        $result = ContactsRepository::findById($attributes['id']);
 
         if ($result) {
             $attributes = $result;
