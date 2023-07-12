@@ -17,7 +17,7 @@ class DBService extends Service
     {
         if (!self::$mysqli) {
             /** @var DatabaseDto $options */
-            $options = new SettingsService('database', DatabaseDto::class);
+            $options = SettingsService::load('database', DatabaseDto::class);
             self::$mysqli = new mysqli($options->host, $options->username, $options->password, $options->name);;
         }
 

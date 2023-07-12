@@ -4,7 +4,7 @@ namespace app\common\bots\vacancy\entities;
 
 use app\common\components\Entity;
 use app\common\components\repository\Repository;
-use app\common\modules\vacancy\repository\ContactsRepository;
+use app\common\bots\vacancy\repository\ContactsRepository;
 
 
 class Contact extends Entity

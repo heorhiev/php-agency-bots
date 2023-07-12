@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\modules\vacancy\repository;
+namespace app\common\bots\vacancy\repository;
 
 use app\common\components\repository\Repository;
 

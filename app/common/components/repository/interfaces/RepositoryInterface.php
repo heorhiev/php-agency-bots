@@ -12,7 +12,7 @@ interface RepositoryInterface
 
     public function asArrayOne(): array;
 
-    public function asEntityOne(): Entity;
+    public function asEntityOne(): ?Entity;
 
     public function entityClassName(): string;
 

@@ -38,8 +38,13 @@ trait FindTrait
     }
 
 
-    public function asEntityOne(): Entity
+    public function asEntityOne(): ?Entity
     {
-        return new ($this->entityClassName())($this->result);
+        if ($this->result) {
+            $class = $this->entityClassName();
+            return new $class($this->result);
+        }
+
+        return null;
     }
 }

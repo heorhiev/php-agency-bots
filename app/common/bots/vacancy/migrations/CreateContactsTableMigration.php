@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\modules\contacts\migrations;
+namespace app\common\bots\contacts\migrations;
 
 use app\common\components\migrations\MigrationInterface;
 

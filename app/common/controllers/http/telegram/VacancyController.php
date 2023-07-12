@@ -2,7 +2,7 @@
 
 namespace app\common\controllers\http\telegram;
 
-use app\common\modules\vacancy\VacancyBot;
+use app\common\bots\vacancy\VacancyBot;
 use app\common\services\LoggerService;
 
 

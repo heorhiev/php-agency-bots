@@ -1,6 +1,6 @@
 {
-  "username": "",
-  "password": "",
-  "host": "localhost",
-  "name": ""
+  "username": "root",
+  "password": "tiger",
+  "host": "database:3306",
+  "name": "agency"
 }
