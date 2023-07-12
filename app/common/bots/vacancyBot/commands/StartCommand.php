@@ -1,8 +1,8 @@
 <?php
 
-namespace app\common\modules\bots\vacancy\commands;
+namespace app\common\modules\vacancy\commands;
 
-use app\common\modules\bots\vacancy\VacancyBot;
+use app\common\modules\vacancy\VacancyBot;
 use TelegramBot\Api\Types\Message;
 
 

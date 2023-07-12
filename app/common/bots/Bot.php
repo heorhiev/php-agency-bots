@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\modules\bots;
+namespace app\common\bots;
 
 use app\common\dto\config\TelegramDto;
 use app\common\services\SettingsService;
