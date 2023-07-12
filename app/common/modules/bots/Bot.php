@@ -2,7 +2,7 @@
 
 namespace app\common\modules\bots;
 
-use app\common\enteties\dto\config\TelegramDto;
+use app\common\dto\config\TelegramDto;
 use app\common\services\SettingsService;
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\enteties\dto;
+namespace app\common\dto;
 
 
 class Dto

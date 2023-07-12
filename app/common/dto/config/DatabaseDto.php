@@ -1,8 +1,8 @@
 <?php
 
-namespace app\common\enteties\dto\config;
+namespace app\common\dto\config;
 
-use app\common\enteties\dto\Dto;
+use app\common\dto\Dto;
 
 
 class DatabaseDto extends Dto

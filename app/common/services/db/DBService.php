@@ -2,7 +2,7 @@
 
 namespace app\common\services\db;
 
-use app\common\enteties\dto\config\DatabaseDto;
+use app\common\dto\config\DatabaseDto;
 use app\common\services\Service;
 use app\common\services\SettingsService;
 use mysqli;

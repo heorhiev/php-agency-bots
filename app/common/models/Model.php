@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\enteties\models;
+namespace app\common\models;
 
 
 abstract class Model
