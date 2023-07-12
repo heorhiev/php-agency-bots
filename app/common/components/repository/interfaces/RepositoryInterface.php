@@ -16,7 +16,11 @@ interface RepositoryInterface
 
     public function entityClassName(): string;
 
-    public function save(Entity $entity): bool;
+    public function getBindTypes(array $columns): array;
+
+    public function create(array $attributes): bool;
+
+    public function update(array $attributes, array $conditions): bool;
 
     public static function tableName(): string;
 }

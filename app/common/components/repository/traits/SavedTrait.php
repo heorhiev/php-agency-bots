@@ -2,45 +2,66 @@
 
 namespace app\common\components\repository\traits;
 
-use app\common\components\Entity;
 use app\common\services\db\DBService;
 
 
 /**
+ * @method array getColumns()
+ * @method array getBindTypes(array $columns)
  * @method static string tableName()
  */
 trait SavedTrait
 {
-    public static $types = ['integer' => 'i', 'string' => 's'];
-
-
-    public function save(Entity $entity): bool
+    public function create(array $attributes): bool
     {
-        $types = array_map([self::class, 'getBindTypeByType'], array_keys($entity::fields()));
+        $columns = array_keys($attributes);
+        $placeholders = join(', ', array_fill(0, count($attributes), '?'));
+        $types = join('', $this->getBindTypes($columns));
 
-        $columns = array_merge(...array_values($entity::fields()));
-        $placeholders = [];
-
-        foreach ($columns as $column) {
-            $placeholders[] = '?';
-            $values[] = $entity->{$column};
-        }
-
-        $columns = join(', ', $columns);
-        $placeholders = join(', ', $placeholders);
-
-        $st = DBService::getMysqli()->prepare(
-            sprintf('INSERT INTO %s (%s) VALUES (%s)', static::tableName(), $columns, $placeholders)
+        $sql = sprintf(
+            'INSERT INTO %s (%s) VALUES (%s)', static::tableName(),
+            join('', $columns),
+            $placeholders
         );
 
-        $st->bind_param(join('', $types), ...$values);
+        $st = DBService::getMysqli()->prepare($sql);
+
+        $st->bind_param($types, ...array_values($attributes));
 
         return $st->execute();
     }
 
 
-    private static function getBindTypeByType($type): string
+    public function update(array $attributes, array $conditions): bool
     {
-        return self::$types[$type];
+        $columns = [];
+
+        // updated columns
+        $updates = [];
+        foreach ($attributes as $key => $value) {
+            $columns[] = $key;
+            $updates[] = $key . ' = ?';
+        }
+        $updates = join(', ', $updates);
+
+        // conditions
+        $where = [];
+        foreach ($conditions as $key => $value) {
+            $columns[] = $key;
+            $where[] = $key . ' = ?';
+        }
+        $where = join(' AND ', $where);
+
+        // bind types
+        $types = join('', $this->getBindTypes($columns));
+
+        // build sql
+        $sql = sprintf('UPDATE %s SET %s WHERE %s', static::tableName(), $updates, $where);
+
+        $st = DBService::getMysqli()->prepare($sql);
+
+        $st->bind_param($types, ...array_values($attributes + $conditions));
+
+        return $st->execute();
     }
 }

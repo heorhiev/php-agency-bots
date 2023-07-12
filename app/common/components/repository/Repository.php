@@ -5,11 +5,13 @@ namespace app\common\components\repository;
 use app\common\components\repository\interfaces\RepositoryInterface;
 use app\common\components\repository\traits\FindTrait;
 use app\common\components\repository\traits\SavedTrait;
+use app\common\components\repository\traits\TypesTrait;
 
 
 abstract class Repository implements RepositoryInterface
 {
-    use FindTrait, SavedTrait;
+    use FindTrait, SavedTrait, TypesTrait;
+
 
     protected $_entityClassName;
 

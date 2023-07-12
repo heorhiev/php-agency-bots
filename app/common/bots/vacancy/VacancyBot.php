@@ -14,6 +14,10 @@ class VacancyBot extends Bot
 
     public function handler()
     {
+
+        StartCommand::run($this, null);
+
+        exit;
         $this->_bot = new \TelegramBot\Api\Client($this->_options->vacancyBotToken);
 
         $this->_bot->command('start', function(Message $message) {

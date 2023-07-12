@@ -9,8 +9,17 @@ use TelegramBot\Api\Types\Message;
 
 class StartCommand
 {
-    public static function run(VacancyBot $bot, Message $message)
+    public static function run(VacancyBot $bot, ?Message $message)
     {
+
+        Contact::repository()->update(['name' => 'xxx'], ['id' => 1]);
+        exit;
+
+        $contact = Contact::repository()->findById(1)->asEntityOne();
+
+        print_r($contact);
+
+        exit;
         $bot->sendMessage($message->getChat()->getId(), 'start');
     }
 }
