@@ -1,8 +1,10 @@
 <?php
 
-namespace app\common\modules\contacts;
+namespace app\common\bots\vacancy\entities;
 
 use app\common\components\Entity;
+use app\common\components\repository\Repository;
+use app\common\modules\vacancy\repository\ContactsRepository;
 
 
 class Contact extends Entity
@@ -18,5 +20,11 @@ class Contact extends Entity
             'integer' => ['id', 'step'],
             'string' => ['name'],
         ];
+    }
+
+
+    public static function repository(): Repository
+    {
+        return new ContactsRepository(self::class);
     }
 }

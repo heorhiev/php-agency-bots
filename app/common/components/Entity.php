@@ -2,11 +2,14 @@
 
 namespace app\common\components;
 
+use app\common\components\repository\Repository;
+
 
 abstract class Entity
 {
-
     abstract public static function fields(): array;
+
+    abstract public static function repository(): Repository;
 
     
     public function __construct($attributes = [])

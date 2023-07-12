@@ -3,19 +3,20 @@
 namespace app\common\components\repository\traits;
 
 use app\common\components\Entity;
+use app\common\components\repository\Repository;
 use app\common\services\db\DBService;
 
 
 /**
+ * @method string entityClassName()
  * @method static string tableName()
- * @method static string entityClassName()
  */
 trait FindTrait
 {
     private $result;
 
 
-    public function findById(int $id): self
+    public function findById(int $id): Repository
     {
         $st = DBService::getMysqli()->prepare('SELECT * FROM ' . static::tableName() . ' WHERE id = ?');
 
@@ -39,6 +40,6 @@ trait FindTrait
 
     public function asEntityOne(): Entity
     {
-        return new (static::entityClassName())($this->result);
+        return new ($this->entityClassName())($this->result);
     }
 }

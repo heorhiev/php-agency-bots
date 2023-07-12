@@ -14,7 +14,7 @@ trait SavedTrait
     public static $types = ['integer' => 'i', 'string' => 's'];
 
 
-    public static function save(Entity $entity): bool
+    public function save(Entity $entity): bool
     {
         $types = array_map([self::class, 'getBindTypeByType'], array_keys($entity::fields()));
 

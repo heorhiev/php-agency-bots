@@ -11,7 +11,20 @@ abstract class Repository implements RepositoryInterface
 {
     use FindTrait, SavedTrait;
 
+    protected $_entityClassName;
+
+
     abstract public static function tableName(): string;
 
-    abstract public static function entityClassName(): string;
+
+    public function __construct($entityClassName)
+    {
+        $this->_entityClassName = $entityClassName;
+    }
+
+
+    public function entityClassName(): string
+    {
+        return $this->_entityClassName;
+    }
 }
