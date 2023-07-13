@@ -58,6 +58,8 @@ class MessageCommand extends Command
                 'status' => VacancyBotConst::CONTACT_STATUS_FINALE,
             ]);
 
+            $this->addButton();
+
             $key = VacancyBotConst::STEP_FINALE;
         } else {
             $key = $this->getContact()->step . '.error';
@@ -83,6 +85,17 @@ class MessageCommand extends Command
 
     public function finale()
     {
+        $this->addButton();
+
+        $this->getBot()->sendMessage($this->getUserId(), VacancyBotConst::STEP_FINALE, null, [
+            'contact' => $this->getContact(),
+            'phone' => $this->getContact()->phone,
+        ]);
+    }
+
+
+    private function addButton()
+    {
         if ($this->getBot()->getOptions()->vacancyBotFinaleUrl) {
             $text = $this->getBot()->getOptions()->vacancyBotFinaleText;
             $url = $this->getBot()->getOptions()->vacancyBotFinaleUrl;
@@ -91,9 +104,5 @@ class MessageCommand extends Command
                 [['text' => $text, 'url' => $url]]
             ]);
         }
-
-        $this->getBot()->sendMessage($this->getUserId(), VacancyBotConst::STEP_FINALE, null, [
-            'contact' => $this->getContact(),
-        ]);
     }
 }

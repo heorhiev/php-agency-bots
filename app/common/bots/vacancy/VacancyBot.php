@@ -46,14 +46,14 @@ class VacancyBot extends Bot
 
     public function setInlineKeyboardMarkup($inlineKeyboardMarkup)
     {
-        $this->inlineKeyboardMarkup = $inlineKeyboardMarkup;
+        $this->_inlineKeyboardMarkup = $inlineKeyboardMarkup;
     }
 
 
     public function sendMessage($userId, $messageKey, $message = null, array $attributes = [])
     {
         if (empty($message)) {
-            $userLang = 'ua';
+            $userLang = null;
             $message = $this->getViewContent($messageKey, $attributes, $userLang);
         }
 
