@@ -3,9 +3,7 @@
 namespace app\common\components\repository;
 
 use app\common\components\repository\interfaces\RepositoryInterface;
-use app\common\components\repository\traits\FindTrait;
-use app\common\components\repository\traits\SavedTrait;
-use app\common\components\repository\traits\TypesTrait;
+use app\common\components\repository\traits\{FindTrait, SavedTrait, TypesTrait};
 
 
 abstract class Repository implements RepositoryInterface

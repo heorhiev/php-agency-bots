@@ -1,10 +1,4 @@
 {
   "defaultLang": "ru",
-  "vacancyBotToken": "6386047975:AAEp3fy5J6c6v3S1hy1AJH4J3CwbfU1wKpc",
-  "vacancyBotTexts": {
-    "start": {
-      "ru": "Привет. \r\nВы попали сюда. \nКак вас зовут?",
-      "ua": "Привiт"
-    }
-  }
+  "vacancyBotToken": "6386047975:AAEp3fy5J6c6v3S1hy1AJH4J3CwbfU1wKpc"
 }

@@ -13,20 +13,17 @@ use app\common\services\db\DBService;
  */
 trait FindTrait
 {
-    private $result;
+    private $_result;
 
 
     public function findById(int $id): Repository
     {
-        $st = DBService::getMysqli()->prepare('SELECT * FROM ' . static::tableName() . ' WHERE id = ?');
+        $stmt = DBService::getMysqli()->prepare('SELECT * FROM ' . static::tableName() . ' WHERE id = ?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
 
-        $st->bind_param('i', $id);
-
-        $st->execute();
-
-        $result = $st->get_result();
-
-        $this->result = $result->num_rows ? $result->fetch_array() : [];
+        $result = $stmt->get_result();
+        $this->_result = $result->num_rows ? $result->fetch_array() : [];
 
         return $this;
     }
@@ -34,15 +31,15 @@ trait FindTrait
 
     public function asArrayOne(): array
     {
-        return $this->result;
+        return $this->_result;
     }
 
 
     public function asEntityOne(): ?Entity
     {
-        if ($this->result) {
+        if ($this->_result) {
             $class = $this->entityClassName();
-            return new $class($this->result);
+            return new $class($this->_result);
         }
 
         return null;

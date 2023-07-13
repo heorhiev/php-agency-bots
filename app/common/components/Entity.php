@@ -7,6 +7,9 @@ use app\common\components\repository\Repository;
 
 abstract class Entity
 {
+    public $id;
+
+
     abstract public static function fields(): array;
 
     abstract public static function repository(): Repository;
@@ -15,6 +18,12 @@ abstract class Entity
     public function __construct($attributes = [])
     {
         $this->init($attributes);
+    }
+
+
+    public function update(array $attributes): bool
+    {
+        return static::repository()->update($attributes, ['id' => $this->id]);
     }
 
 

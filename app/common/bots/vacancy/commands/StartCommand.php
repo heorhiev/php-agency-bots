@@ -2,24 +2,29 @@
 
 namespace app\common\bots\vacancy\commands;
 
+use app\common\bots\constants\VacancyBotConst;
 use app\common\bots\vacancy\entities\Contact;
-use app\common\bots\vacancy\VacancyBot;
-use TelegramBot\Api\Types\Message;
 
 
-class StartCommand
+class StartCommand extends Command
 {
-    public static function run(VacancyBot $bot, ?Message $message)
+    public function run(): void
     {
+        $contact = $this->getContact();
 
-        Contact::repository()->update(['name' => 'xxx'], ['id' => 1]);
-        exit;
+        if ($contact) {
+            $userName = $contact->name;
+        } else {
+            $userName = '';
 
-        $contact = Contact::repository()->findById(1)->asEntityOne();
+            Contact::repository()->create([
+                'id' => $this->getUserId(),
+                'steps' => VacancyBotConst::STEP_ENTER_NAME,
+            ]);
+        }
 
-        print_r($contact);
-
-        exit;
-        $bot->sendMessage($message->getChat()->getId(), 'start');
+        $this->getBot()->sendMessage($this->getUserId(), VacancyBotConst::STEP_ENTER_NAME, null, [
+            'userName' => $userName,
+        ]);
     }
 }
