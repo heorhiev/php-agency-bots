@@ -60,7 +60,7 @@ trait SavedTrait
 
         $st = DBService::getMysqli()->prepare($sql);
 
-        $st->bind_param($types, ...array_values($attributes + $conditions));
+        $st->bind_param($types, ...array_merge(array_values($attributes), array_values($conditions)));
 
         return $st->execute();
     }

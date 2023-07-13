@@ -8,6 +8,7 @@ use app\common\components\repository\Repository;
 
 interface RepositoryInterface
 {
+    public function select(array $columns): Repository;
     public function findById(int $id): Repository;
 
     public function asArrayOne(): array;

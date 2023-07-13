@@ -21,6 +21,7 @@ class StartCommand extends Command
             Contact::repository()->create([
                 'id' => $this->getUserId(),
                 'step' => VacancyBotConst::STEP_ENTER_NAME,
+                'status' => VacancyBotConst::CONTACT_STATUS_NEW
             ]);
         }
 

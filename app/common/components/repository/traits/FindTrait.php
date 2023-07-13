@@ -13,17 +13,58 @@ use app\common\services\db\DBService;
  */
 trait FindTrait
 {
+    private $_select = '*';
+
     private $_result;
+
+
+    public function select(array $columns): Repository
+    {
+        $this->_select = join(', ', $columns);
+        return $this;
+    }
 
 
     public function findById(int $id): Repository
     {
-        $stmt = DBService::getMysqli()->prepare('SELECT * FROM ' . static::tableName() . ' WHERE id = ?');
+        $stmt = DBService::getMysqli()->prepare(
+            sprintf('SELECT %s FROM %s WHERE id = ?', $this->_select, static::tableName())
+        );
+
         $stmt->bind_param('i', $id);
         $stmt->execute();
 
         $result = $stmt->get_result();
-        $this->_result = $result->num_rows ? $result->fetch_array() : [];
+        $this->_result = $result->num_rows ? $result->fetch_assoc() : [];
+
+        return $this;
+    }
+
+
+    public function filter($conditions): Repository
+    {
+        $where = $columns = [];
+        foreach ($conditions as $key => $value) {
+            $columns[] = $key;
+            $where[] = $key . ' = ?';
+        }
+        $where = join(' AND ', $where);
+
+        // bind types
+        $types = join('', $this->getBindTypes($columns));
+
+        $stmt = DBService::getMysqli()->prepare(
+            sprintf('SELECT %s FROM %s WHERE %s', $this->_select, static::tableName(), $where)
+        );
+
+        $stmt->bind_param($types, ...array_values($conditions));
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_row()) {
+            $this->_result[] = $row;
+        }
 
         return $this;
     }
@@ -43,5 +84,11 @@ trait FindTrait
         }
 
         return null;
+    }
+
+
+    public function asArrayAll(): ?array
+    {
+        return $this->_result;
     }
 }
