@@ -5,7 +5,7 @@ namespace app\common\controllers\console\vacancy;
 use app\common\bots\vacancy\constants\VacancyBotConst;
 use app\common\bots\vacancy\entities\Contact;
 use app\common\controllers\Controller;
-use app\common\services\googleSheets\UpdateService;
+use app\common\services\googleSheets\UploadService;
 
 
 class ReportsController extends Controller
@@ -23,12 +23,12 @@ class ReportsController extends Controller
             ->filter(['status' => VacancyBotConst::CONTACT_STATUS_NEW])
             ->asArrayAll();
 
-        $service = new UpdateService(
+        $service = new UploadService(
             self::APP_NAME,
             self::CRED_PATH
         );
 
-        if ($service->upload(self::SHEET_ID, self::LIST_NAME, $contacts)) {
+        if ($service->save(self::SHEET_ID, self::LIST_NAME, $contacts)) {
             Contact::repository()->update(
                 ['status' => VacancyBotConst::CONTACT_STATUS_UPLOADED],
                 ['status' => VacancyBotConst::CONTACT_STATUS_NEW]

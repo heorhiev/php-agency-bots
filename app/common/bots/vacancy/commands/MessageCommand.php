@@ -5,7 +5,7 @@ namespace app\common\bots\vacancy\commands;
 use app\common\bots\vacancy\constants\VacancyBotConst;
 use app\common\components\validators\TextValidator;
 use app\common\components\validators\PhoneValidator;
-use app\common\services\googleSheets\UpdateService;
+use app\common\services\googleSheets\UploadService;
 
 
 class MessageCommand extends Command
@@ -70,12 +70,12 @@ class MessageCommand extends Command
             'contact' => $this->getContact(),
         ]);
 
-        $service = new UpdateService(
+        $service = new UploadService(
             self::APP_NAME,
             self::CRED_PATH
         );
 
-        $service->upload(self::SHEET_ID, self::LIST_NAME, [[
+        $service->save(self::SHEET_ID, self::LIST_NAME, [[
             $this->getContact()->id,
             $this->getContact()->name,
             $this->getContact()->phone,
