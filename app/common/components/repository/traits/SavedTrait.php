@@ -20,7 +20,7 @@ trait SavedTrait
 
         $sql = sprintf(
             'INSERT INTO %s (%s) VALUES (%s)', static::tableName(),
-            join('', $columns),
+            join(', ', $columns),
             $placeholders
         );
 

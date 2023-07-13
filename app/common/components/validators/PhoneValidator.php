@@ -1,12 +1,13 @@
 <?php
 
-namespace app\common\components;
+namespace app\common\components\validators;
 
 
 class PhoneValidator extends Validator
 {
     public function isValid($value): bool
     {
-        return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+        $value = preg_replace('/[^0-9]/', '', $value);
+        return (new TextValidator(['min' => 7, 'max' => 12]))->isValid($value);
     }
 }

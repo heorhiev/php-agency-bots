@@ -2,8 +2,13 @@
 
 namespace app\common\bots\vacancy;
 
+use app\common\bots\vacancy\constants\VacancyBotConst;
+use app\common\bots\vacancy\entities\Contact;
 use app\common\components\Bot;
 use app\common\bots\vacancy\commands\StartCommand;
+use app\common\bots\vacancy\commands\MessageCommand;
+use app\common\components\validators\PhoneValidator;
+use app\common\services\LoggerService;
 use app\common\services\RenderService;
 use TelegramBot\Api\Types\Message;
 
@@ -23,11 +28,12 @@ class VacancyBot extends Bot
         //Handle text messages
         $this->_bot->on(function (\TelegramBot\Api\Types\Update $update) {
 
-            MessageCommand::run($this, $message);
+            try {
+                (new MessageCommand($this, $update->getMessage()))->run();
+            } catch (\Exception $e) {
+                LoggerService::error($e->getMessage());
+            }
 
-            $message = $update->getMessage();
-            $id = $message->getChat()->getId();
-            $this->_bot->sendMessage($id, 'Your message: ' . $message->getText());
         }, function () {
             return true;
         });
@@ -43,10 +49,7 @@ class VacancyBot extends Bot
             $message = $this->getViewContent($messageKey, $attributes, $userLang);
         }
 
-        echo $message;
-        exit;
-
-        $this->_bot->sendMessage($userId, $message);
+        $this->_bot->sendMessage($userId, $message, 'html');
     }
 
 

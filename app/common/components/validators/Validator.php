@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\components;
+namespace app\common\components\validators;
 
 use app\common\components\validators\interfaces\ValidatorInterface;
 

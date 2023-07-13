@@ -1,6 +1,6 @@
 <?php
 
-namespace app\common\bots\constants;
+namespace app\common\bots\vacancy\constants;
 
 
 final class VacancyBotConst

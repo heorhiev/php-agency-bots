@@ -2,7 +2,7 @@
 
 namespace app\common\bots\vacancy\commands;
 
-use app\common\bots\constants\VacancyBotConst;
+use app\common\bots\vacancy\constants\VacancyBotConst;
 use app\common\bots\vacancy\entities\Contact;
 
 
@@ -14,12 +14,13 @@ class StartCommand extends Command
 
         if ($contact) {
             $userName = $contact->name;
+            $contact->update(['step' => VacancyBotConst::STEP_ENTER_NAME,]);
         } else {
             $userName = '';
 
             Contact::repository()->create([
                 'id' => $this->getUserId(),
-                'steps' => VacancyBotConst::STEP_ENTER_NAME,
+                'step' => VacancyBotConst::STEP_ENTER_NAME,
             ]);
         }
 

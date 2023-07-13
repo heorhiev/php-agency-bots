@@ -23,7 +23,13 @@ abstract class Entity
 
     public function update(array $attributes): bool
     {
-        return static::repository()->update($attributes, ['id' => $this->id]);
+        $updated = static::repository()->update($attributes, ['id' => $this->id]);
+
+        if ($updated) {
+            $this->init($attributes);
+        }
+
+        return $updated;
     }
 
 
