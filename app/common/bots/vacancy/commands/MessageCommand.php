@@ -4,6 +4,8 @@ namespace app\common\bots\vacancy\commands;
 
 
 use app\common\bots\constants\VacancyBotConst;
+use app\common\bots\vacancy\NameValidator;
+use app\common\components\PhoneValidator;
 
 class MessageCommand extends Command
 {
@@ -17,7 +19,7 @@ class MessageCommand extends Command
     {
         $text = trim($this->getMessage()->getText());
 
-        if (strlen($text) > 5) {
+        if ((new NameValidator())->isValid($text)) {
             $this->getContact()->update([
                 'name' => $text,
                 'step' => VacancyBotConst::STEP_ENTER_PHONE,
@@ -38,7 +40,7 @@ class MessageCommand extends Command
     {
         $text = trim($this->getMessage()->getText());
 
-        if (strlen($text) > 5) {
+        if ((new PhoneValidator())->isValid($text)) {
             $this->getContact()->update([
                 'phone' => $text,
                 'step' => VacancyBotConst::STEP_FINALE
