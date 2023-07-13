@@ -7,6 +7,6 @@
 Вы ввели:
 
 Имя - <code><?php echo $contact->name; ?></code>;
-Телефонный номер - <code><?php echo $contact->name; ?></code>.
+Телефонный номер - <code><?php echo $contact->phone; ?></code>.
 
 Мы свяжемся с вами в ближайшее время!

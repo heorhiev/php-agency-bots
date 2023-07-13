@@ -5,10 +5,18 @@ namespace app\common\bots\vacancy\commands;
 use app\common\bots\vacancy\constants\VacancyBotConst;
 use app\common\components\validators\TextValidator;
 use app\common\components\validators\PhoneValidator;
+use app\common\services\googleSheets\UpdateService;
 
 
 class MessageCommand extends Command
 {
+    const APP_NAME = 'vacancyBot';
+    const CRED_PATH = CONFIG_PATH . '/vacancy_google_sheet_key.json';
+    const SHEET_ID = '1IzDCrACjuIgr91QWCBBBy8VKsO9PudRYuxUvLuBQLEk';
+
+    const LIST_NAME = 'List1';
+
+
     public function run(): void
     {
         $this->{$this->getContact()->step}();
@@ -46,7 +54,8 @@ class MessageCommand extends Command
         if ((new PhoneValidator())->isValid($text)) {
             $this->getContact()->update([
                 'phone' => $text,
-                'step' => VacancyBotConst::STEP_FINALE
+                'step' => VacancyBotConst::STEP_FINALE,
+                'status' => VacancyBotConst::CONTACT_STATUS_FINALE,
             ]);
 
             $key = VacancyBotConst::STEP_FINALE;
@@ -58,6 +67,17 @@ class MessageCommand extends Command
             'phone' => $text,
             'contact' => $this->getContact(),
         ]);
+
+        $service = new UpdateService(
+            self::APP_NAME,
+            self::CRED_PATH
+        );
+
+        $service->upload(self::SHEET_ID, self::LIST_NAME, [[
+            $this->getContact()->id,
+            $this->getContact()->name,
+            $this->getContact()->phone,
+        ]]);
     }
 
 
