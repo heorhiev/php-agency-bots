@@ -9,4 +9,6 @@ class TelegramDto extends Dto
 {
     public $defaultLang;
     public $vacancyBotToken;
+    public $vacancyBotFinaleUrl;
+    public $vacancyBotFinaleText;
 }

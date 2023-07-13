@@ -83,6 +83,15 @@ class MessageCommand extends Command
 
     public function finale()
     {
+        if ($this->getBot()->getOptions()->vacancyBotFinaleUrl) {
+            $text = $this->getBot()->getOptions()->vacancyBotFinaleText;
+            $url = $this->getBot()->getOptions()->vacancyBotFinaleUrl;
+
+            $this->getBot()->setInlineKeyboardMarkup([
+                [['text' => $text, 'url' => $url]]
+            ]);
+        }
+
         $this->getBot()->sendMessage($this->getUserId(), VacancyBotConst::STEP_FINALE, null, [
             'contact' => $this->getContact(),
         ]);

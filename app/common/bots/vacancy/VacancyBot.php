@@ -16,6 +16,8 @@ use TelegramBot\Api\Types\Message;
 class VacancyBot extends Bot
 {
     public $_bot;
+    public $_inlineKeyboardMarkup;
+
 
     public function handler()
     {
@@ -42,6 +44,12 @@ class VacancyBot extends Bot
     }
 
 
+    public function setInlineKeyboardMarkup($inlineKeyboardMarkup)
+    {
+        $this->inlineKeyboardMarkup = $inlineKeyboardMarkup;
+    }
+
+
     public function sendMessage($userId, $messageKey, $message = null, array $attributes = [])
     {
         if (empty($message)) {
@@ -49,7 +57,13 @@ class VacancyBot extends Bot
             $message = $this->getViewContent($messageKey, $attributes, $userLang);
         }
 
-        $this->_bot->sendMessage($userId, $message, 'html');
+        $keyboard = null;
+
+        if ($this->_inlineKeyboardMarkup) {
+            $keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup($this->_inlineKeyboardMarkup);
+        }
+
+        $this->_bot->sendMessage($userId, $message, 'html', false, null, $keyboard);
     }
 
 
