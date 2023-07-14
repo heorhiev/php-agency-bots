@@ -6,19 +6,21 @@ use app\common\components\Bot;
 use app\common\bots\vacancy\commands\StartCommand;
 use app\common\bots\vacancy\commands\MessageCommand;
 use app\common\services\RenderService;
+use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Message;
 
 
 class VacancyBot extends Bot
 {
-    public $_bot;
-    public $_inlineKeyboardMarkup;
-    public $_replyKeyboardMarkup;
+    /** @var $_bot Client */
+    private $_bot;
+    private $_inlineKeyboardMarkup;
+    private $_replyKeyboardMarkup;
 
 
-    public function handler()
+    public function handler(): void
     {
-        $this->_bot = new \TelegramBot\Api\Client($this->_options->vacancyBotToken);
+        $this->_bot = new Client($this->_options->vacancyBotToken);
 
         $this->_bot->command('start', function(Message $message) {
             (new StartCommand($this, $message))->run();
@@ -35,15 +37,17 @@ class VacancyBot extends Bot
     }
 
 
-    public function setInlineKeyboardMarkup($inlineKeyboardMarkup)
+    public function setInlineKeyboardMarkup($inlineKeyboardMarkup): self
     {
         $this->_inlineKeyboardMarkup = $inlineKeyboardMarkup;
+        return $this;
     }
 
 
-    public function setReplyKeyboardMarkup($replyKeyboardMarkup)
+    public function setReplyKeyboardMarkup($replyKeyboardMarkup): self
     {
-        $this->_replyKeyboardMarkup = $replyKeyboardMarkup ;
+        $this->_replyKeyboardMarkup = $replyKeyboardMarkup;
+        return $this;
     }
 
 
