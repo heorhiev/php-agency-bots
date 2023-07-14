@@ -70,7 +70,7 @@ class VacancyBot extends Bot
 
     private function getViewContent($messageKey, $attributes, $lang = null): ?string
     {
-        $path = 'vacancy-bot/' . $messageKey;
+        $path = COMMON_PATH . '/bots/vacancy/views/' . $messageKey;
 
         if ($lang) {
             $langPath = $path . '.' . $lang;

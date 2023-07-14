@@ -33,6 +33,6 @@ class RenderService extends Service
 
     private static function getPath(string $filename): string
     {
-        return VIEWS_PATH . '/' .  $filename . '.php';
+        return $filename . '.php';
     }
 }
