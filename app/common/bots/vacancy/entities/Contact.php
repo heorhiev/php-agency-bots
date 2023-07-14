@@ -16,6 +16,7 @@ class Contact extends Entity
     public $status;
 
 
+
     public static function fields(): array
     {
         return [

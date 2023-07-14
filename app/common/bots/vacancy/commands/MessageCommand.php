@@ -5,21 +5,20 @@ namespace app\common\bots\vacancy\commands;
 use app\common\bots\vacancy\constants\VacancyBotConst;
 use app\common\components\validators\TextValidator;
 use app\common\components\validators\PhoneValidator;
+use app\common\dto\config\GoogleSheetDto;
 use app\common\services\googleSheets\UploadService;
+use app\common\services\SettingsService;
 
 
 class MessageCommand extends Command
 {
-    const APP_NAME = 'vacancyBot';
-    const CRED_PATH = CONFIG_PATH . '/vacancy_google_sheet_key.json';
-    const SHEET_ID = '1IzDCrACjuIgr91QWCBBBy8VKsO9PudRYuxUvLuBQLEk';
-
-    const LIST_NAME = 'List1';
-
-
     public function run(): void
     {
-        $this->{$this->getContact()->step}();
+        if ($this->getMessage()->getContact() != null) {
+            $this->enterPhone();
+        } else {
+            $this->{$this->getContact()->step}();
+        }
     }
 
 
@@ -29,6 +28,10 @@ class MessageCommand extends Command
         $text = preg_replace('/[^a-zA-ZА-Яа-я0-9-\s$]/u', '', $text);
 
         if ((new TextValidator())->isValid($text)) {
+
+            $this->getBot()->setReplyKeyboardMarkup(
+                [[['text' => 'Отправить номер', 'request_contact' => true]]]
+            );
 
             $this->getContact()->update([
                 'name' => $text,
@@ -49,7 +52,11 @@ class MessageCommand extends Command
 
     public function enterPhone(): void
     {
-        $text = trim($this->getMessage()->getText());
+        if ($this->getMessage()->getContact() != null) {
+            $text = $this->getMessage()->getContact()->getPhoneNumber();
+        } else {
+            $text = trim($this->getMessage()->getText());
+        }
 
         if ((new PhoneValidator())->isValid($text)) {
             $this->getContact()->update([
@@ -70,16 +77,11 @@ class MessageCommand extends Command
             'contact' => $this->getContact(),
         ]);
 
-        $service = new UploadService(
-            self::APP_NAME,
-            self::CRED_PATH
-        );
+        $service = new UploadService(SettingsService::load('vacancy/google_sheet', GoogleSheetDto::class));
 
-        $service->save(self::SHEET_ID, self::LIST_NAME, [[
-            $this->getContact()->id,
-            $this->getContact()->name,
-            $this->getContact()->phone,
-        ]]);
+        $service->save([
+            $this->getContact()->getAttributes(['id', 'name', 'phone'])
+        ]);
     }
 
 

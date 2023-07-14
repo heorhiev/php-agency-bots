@@ -33,10 +33,22 @@ abstract class Entity
     }
 
 
+    public function getAttributes(array $keys): array
+    {
+        $result = [];
+
+        foreach ($keys as $key) {
+            $result[] = $this->{$key};
+        }
+
+        return $result;
+    }
+
+
     /**
      * Load
      */
-    protected function init(array $attributes)
+    protected function init(array $attributes): void
     {
         foreach ($attributes as $property => $value) {
             if (property_exists($this, $property)) {

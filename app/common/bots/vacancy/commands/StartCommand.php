@@ -14,7 +14,7 @@ class StartCommand extends Command
 
         if ($contact) {
             $userName = $contact->name;
-            $contact->update(['step' => VacancyBotConst::STEP_ENTER_NAME,]);
+            $contact->update(['step' => VacancyBotConst::STEP_ENTER_NAME]);
         } else {
             $userName = '';
 
