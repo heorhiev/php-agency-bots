@@ -13,7 +13,9 @@ class VacancyController extends \app\common\controllers\Controller
         try {
             (new VacancyBot())->handler();
         } catch (\Exception $e) {
-            LoggerService::error($e->getMessage());
+            echo '<pre>';
+            print_r($e);
+            LoggerService::error($e);
         }
     }
 }
