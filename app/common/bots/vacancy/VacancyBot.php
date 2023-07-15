@@ -58,14 +58,12 @@ class VacancyBot extends Bot
             $message = $this->getViewContent($messageKey, $attributes, $userLang);
         }
 
-        $keyboard = null;
-
         if ($this->_inlineKeyboardMarkup) {
             $keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup($this->_inlineKeyboardMarkup);
-        }
-
-        if ($this->_replyKeyboardMarkup) {
-            $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup($this->_replyKeyboardMarkup, true, false, true);
+        } elseif ($this->_replyKeyboardMarkup) {
+            $keyboard = new \TelegramBot\Api\Types\ReplyKeyboardMarkup($this->_replyKeyboardMarkup, true, true, true);
+        } else {
+            $keyboard = null;
         }
 
         $this->_bot->sendMessage($userId, $message, 'html', false, null, $keyboard);

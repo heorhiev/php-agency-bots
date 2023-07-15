@@ -10,19 +10,28 @@ class StartCommand extends Command
 {
     public function run(): void
     {
-        $contact = $this->getContact();
+        $chat = $this->getMessage()->getChat();
 
-        if ($contact) {
-            $userName = $contact->name;
-            $contact->update(['step' => VacancyBotConst::STEP_ENTER_NAME]);
+        $userName = trim($chat->getFirstName() . ' ' . $chat->getLastName());
+
+        if ($this->getContact()) {
+            $this->getContact()->update([
+                'step' => VacancyBotConst::STEP_ENTER_NAME,
+                'name' => null,
+                'phone' => null,
+            ]);
         } else {
-            $userName = '';
-
             Contact::repository()->create([
                 'id' => $this->getUserId(),
                 'step' => VacancyBotConst::STEP_ENTER_NAME,
                 'status' => VacancyBotConst::CONTACT_STATUS_NEW
             ]);
+        }
+
+        if ($userName) {
+            $this->getBot()->setReplyKeyboardMarkup(
+                [[['text' => $userName]]]
+            );
         }
 
         $this->getBot()->sendMessage($this->getUserId(), VacancyBotConst::STEP_ENTER_NAME, null, [
