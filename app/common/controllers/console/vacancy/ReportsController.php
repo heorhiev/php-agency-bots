@@ -5,17 +5,13 @@ namespace app\common\controllers\console\vacancy;
 use app\common\bots\vacancy\constants\VacancyBotConst;
 use app\common\bots\vacancy\entities\Contact;
 use app\common\controllers\Controller;
+use app\common\dto\config\GoogleSheetDto;
 use app\common\services\googleSheets\UploadService;
+use app\common\services\SettingsService;
 
 
 class ReportsController extends Controller
 {
-    const APP_NAME = 'vacancyBot';
-    const CRED_PATH = CONFIG_PATH . '/vacancy_google_sheet_key.json';
-    const SHEET_ID = '1IzDCrACjuIgr91QWCBBBy8VKsO9PudRYuxUvLuBQLEk';
-
-    const LIST_NAME = 'List1';
-
     public function main()
     {
         $contacts = Contact::repository()
@@ -23,12 +19,12 @@ class ReportsController extends Controller
             ->filter(['status' => VacancyBotConst::CONTACT_STATUS_NEW])
             ->asArrayAll();
 
-        $service = new UploadService(
-            self::APP_NAME,
-            self::CRED_PATH
-        );
+        print_r($contacts);
+        exit;
 
-        if ($service->save(self::SHEET_ID, self::LIST_NAME, $contacts)) {
+        $service = new UploadService(SettingsService::load('vacancy/google_sheet', GoogleSheetDto::class));
+
+        if ($service->save($contacts)) {
             Contact::repository()->update(
                 ['status' => VacancyBotConst::CONTACT_STATUS_UPLOADED],
                 ['status' => VacancyBotConst::CONTACT_STATUS_NEW]

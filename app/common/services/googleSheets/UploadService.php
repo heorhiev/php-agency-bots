@@ -53,7 +53,7 @@ class UploadService extends Service
     public function add(array $rows): void
     {
         $valueRange = new \Google_Service_Sheets_ValueRange();
-        $valueRange->setValues(array_values($rows));
+        $valueRange->setValues($rows);
 
         $this->_sheetService->spreadsheets_values->append(
             $this->_options->sheetId,
