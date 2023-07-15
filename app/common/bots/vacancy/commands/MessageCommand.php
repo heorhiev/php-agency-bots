@@ -30,7 +30,7 @@ class MessageCommand extends Command
         if ((new TextValidator())->isValid($text)) {
 
             $this->getBot()->setReplyKeyboardMarkup(
-                [[['text' => 'Отправить номер', 'request_contact' => true]]]
+                [[['text' => 'Надіслати номер із телеграма', 'request_contact' => true]]]
             );
 
             $this->getContact()->update([
