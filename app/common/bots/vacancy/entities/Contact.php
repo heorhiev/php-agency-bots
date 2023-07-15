@@ -14,14 +14,15 @@ class Contact extends Entity
     public $step;
     public $phone;
     public $status;
-
+    public $created;
+    public $updated;
 
 
     public static function fields(): array
     {
         return [
             'integer' => ['id', 'status'],
-            'string' => ['name', 'step', 'phone'],
+            'string' => ['name', 'step', 'phone', 'created', 'updated'],
         ];
     }
 

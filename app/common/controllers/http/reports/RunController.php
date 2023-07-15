@@ -20,7 +20,7 @@ class RunController extends Controller
         $service = new UploadService(SettingsService::load('vacancy/google_sheet', GoogleSheetDto::class));
 
         $service->save([
-            $contact->getAttributes(['id', 'name', 'phone'])
+            $contact->getAttributes(['id', 'name', 'phone', 'created']),
         ]);
     }
 }
