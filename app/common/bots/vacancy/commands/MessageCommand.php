@@ -82,7 +82,7 @@ class MessageCommand extends Command
         date_default_timezone_set('Europe/Sofia');
 
         $data  = $this->getContact()->getAttributes(['id', 'name', 'phone']);
-        $data[] = date('Y-m-d H:i');
+        $data[] = date('Y-m-d H:i:s');
 
         $service->save([$data]);
     }
