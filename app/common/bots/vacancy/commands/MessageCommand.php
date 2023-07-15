@@ -30,7 +30,7 @@ class MessageCommand extends Command
         if ((new TextValidator())->isValid($text)) {
 
             $this->getBot()->setReplyKeyboardMarkup(
-                [[['text' => 'Надіслати номер із телеграма', 'request_contact' => true]]]
+                [[['text' => 'Надіслати', 'request_contact' => true]]]
             );
 
             $this->getContact()->update([
@@ -79,9 +79,12 @@ class MessageCommand extends Command
 
         $service = new UploadService(SettingsService::load('vacancy/google_sheet', GoogleSheetDto::class));
 
-        $service->save([
-            $this->getContact()->getAttributes(['id', 'name', 'phone'])
-        ]);
+        date_default_timezone_set('Europe/Sofia');
+
+        $data  = $this->getContact()->getAttributes(['id', 'name', 'phone']);
+        $data[] = date('Y-m-d H:i');
+
+        $service->save([$data]);
     }
 
 
